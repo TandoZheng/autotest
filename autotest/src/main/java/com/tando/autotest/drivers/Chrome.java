@@ -10,6 +10,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Chrome {
 
+	
+public WebDriver create() {
+		
+	System.setProperty("webdriver.chrome.driver", ".\\tools\\chromedriver.exe");
+    ChromeOptions options = new ChromeOptions();
+    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+    options.addArguments("--test-type", "--start-maximized");
+    WebDriver driver = new ChromeDriver(options);
+        return driver;
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 
 		System.setProperty("webdriver.chrome.driver", ".\\tools\\chromedriver.exe");

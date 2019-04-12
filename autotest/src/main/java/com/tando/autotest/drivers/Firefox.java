@@ -7,6 +7,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Firefox {
 
+	
+	public WebDriver create() {
+		
+		System.setProperty("webdriver.gecko.driver", ".\\tools\\geckodriver.exe");
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        return driver;
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
 
 		System.setProperty("webdriver.gecko.driver", ".\\tools\\geckodriver.exe");

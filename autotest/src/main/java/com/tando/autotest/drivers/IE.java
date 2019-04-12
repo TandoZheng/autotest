@@ -7,17 +7,26 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class IE {
 
+	
+	public WebDriver create() {
+
+		System.setProperty("webdriver.ie.driver", ".\\tools\\IEDriverServer.exe");
+		WebDriver driver = new InternetExplorerDriver();
+		driver.manage().window().maximize();
+		return driver;
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 
 		System.setProperty("webdriver.ie.driver", ".\\tools\\IEDriverServer.exe");
-        WebDriver driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
-        driver.get("http://www.baidu.com");
-        String s = driver.getTitle();
-        System.out.println(s);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Thread.sleep(1000);
-        driver.close();
+		WebDriver driver = new InternetExplorerDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.baidu.com");
+		String s = driver.getTitle();
+		System.out.println(s);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Thread.sleep(1000);
+		driver.close();
 	}
 
 }
