@@ -14,7 +14,7 @@ public class IE {
         driver.manage().window().maximize();
         driver.get("http://www.baidu.com");
         String s = driver.getTitle();
-        System.out.print(s);
+        System.out.println(s);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Thread.sleep(1000);
         driver.close();

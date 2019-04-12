@@ -19,9 +19,10 @@ public class Chrome {
         options.addArguments("--test-type", "--start-maximized");
         WebDriver driver = new ChromeDriver(options);
         driver.get("http://www.baidu.com");
-
+        String s = driver.getTitle();
+        System.out.println(s);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         driver.close();
 	}
 
