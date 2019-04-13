@@ -31,6 +31,16 @@ public class BaiduTest {
     	ui.click(BaiduPage.searchButton);
     }
     
+    public void testBaiduCase2() {
+		  ui.open(BaiduPage.url);
+		  ui.click(BaiduPage.clickNews);
+		  ui.verifyDisplayed(BaiduPage.linkText);
+		  ui.scrollToElement(BaiduPage.linkText);
+		  ui.click(BaiduPage.linkText);
+//		  ui.verifyTitle(BaiduPage.getText,"习近平的心愿：让各族群众都过上好日子");
+		  ui.Wait(2);
+    }
+    
     @After
     public void after() {
     	ui.close();
