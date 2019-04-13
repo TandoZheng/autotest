@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.*;
 
 import com.tando.autotest.drivers.Firefox;
 
@@ -29,29 +30,28 @@ public class UI {
 	// open a url
 	public void open(String url) {
 		driver.get(url);
-		waitTime();
 	}
 
 	// click element
 	public void click(By by) {
 		element(by).click();
-		waitTime();
 	}
 
 	// set element
 	public void setValue(By by, String value) {
 		element(by).sendKeys(value);
-		waitTime();
 	}
 
 	// element
-	public WebElement element(By by) {
-		try {
-			return driver.findElement(by);
-		} catch (NoSuchElementException e) {
-			return null;
+		public WebElement element(final By by) {
+
+			WebElement e = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
+				public WebElement apply(WebDriver d) {
+					return d.findElement(by);
+				}
+			});
+			return e;
 		}
-	}
 	
 	//close
 	public void close() {
@@ -124,7 +124,7 @@ public class UI {
 	}
 		
 	// verify element is existed
-	private boolean isExisted(By by) {
+	public boolean isExisted(By by) {
 		try {
 			driver.findElement(by);
 			return true;
@@ -134,7 +134,7 @@ public class UI {
 	}
 
 	// verify element is displayed
-	private boolean isDisplayed(By by) {
+	public boolean isDisplayed(By by) {
 		if (isExisted(by)) {
 			return element(by).isDisplayed();
 		} else {
@@ -144,7 +144,7 @@ public class UI {
 	
 
 	// verify element is selected
-	private boolean isSelected(By by) {
+	public boolean isSelected(By by) {
 		if (isExisted(by)) {
 			return element(by).isSelected();
 		} else {
@@ -153,7 +153,7 @@ public class UI {
 	}
 	
 	// verify element is enabled
-	private boolean isEnabled(By by) {
+	public boolean isEnabled(By by) {
 		if (isExisted(by)) {
 			return element(by).isEnabled();
 		} else {
@@ -163,42 +163,42 @@ public class UI {
 	
 	// verify element is existed
 	public void verifyExisted(By by) {
-		Assert.assertTrue("Element verify exist successful!" + by.toString(), isExisted(by));
+		Assert.assertTrue("Verify Element " + by.toString() + " exist failed!", isExisted(by));
 	}
 
 	// verify element is not existed
 	public void verifyNotExisted(By by) {
-		Assert.assertFalse("Element verify not exist failed!" + by.toString(), isExisted(by));
+		Assert.assertFalse("Verify Element " + by.toString() + " not exist failed!", isExisted(by));
 	}
 		
 	// verify element is displayed
 	public void verifyDisplayed(By by) {
-		Assert.assertTrue("Element verify display successful!" + by.toString(), isDisplayed(by));
+		Assert.assertTrue("Verify Element " + by.toString() + " displayed failed!", isDisplayed(by));
 	}
 		
 	// verify element is not displayed
 	public void verifyNotDisplayed(By by) {
-		Assert.assertFalse("Element verify display failed!" + by.toString(), isDisplayed(by));
+		Assert.assertFalse("Verify Element " + by.toString() + " not displayed failed!", isDisplayed(by));
 	}
 		
 	// verify element is selected
 	public void verifySelected(By by) {
-		Assert.assertTrue("Element verify select successful!" + by.toString(), isSelected(by));
+		Assert.assertTrue("Verify Element " + by.toString() + " selected failed!", isSelected(by));
 	}
 		
 	// verify element is not selected
 	public void verifyNotSelected(By by) {
-		Assert.assertFalse("Element verify select failed!" + by.toString(), isSelected(by));
+		Assert.assertFalse("Verify Element " + by.toString() + " not selected failed!", isSelected(by));
 	}
 		
 	// verify element is enabled
 	public void verifyEnabled(By by) {
-		Assert.assertTrue("Element verify select successful!" + by.toString(), isEnabled(by));
+		Assert.assertTrue("Verify Element " + by.toString() + " enabled failed!", isEnabled(by));
 	}
 				
 	// verify element is not enabled
 	public void verifyNotEnabled(By by) {
-		Assert.assertFalse("Element verify select failed!" + by.toString(), isEnabled(by));
+		Assert.assertFalse("Verify Element " + by.toString() + " not enabled failed!", isEnabled(by));
 	}
 		
 	// wait time

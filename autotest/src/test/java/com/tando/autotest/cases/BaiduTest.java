@@ -29,11 +29,11 @@ public class BaiduTest {
     	ui.open(BaiduPage.url);
     	ui.setValue(BaiduPage.searchText, "自动化Selenium");
     	ui.click(BaiduPage.searchButton);
-    	ui.waitTime();
     }
     
     @After
     public void after() {
+    	ui.close();
     }
     
     @AfterClass
