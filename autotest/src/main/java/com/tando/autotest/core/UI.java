@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 
 import com.tando.autotest.drivers.Firefox;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
 public class UI {
 
@@ -68,42 +69,23 @@ public class UI {
 	}
 	
 	//get url
-	public String getCurrentUrl(){
+	public String getUrl(){
 		return driver.getCurrentUrl();
 	}
 	
 	//verify tag name successful
-	public void verifyCurrentUrlOk(String urlExpected) {
-		Assert.assertEquals("verify url successful!" + urlExpected, getCurrentUrl());
-	}
-		
-	//verify tag name failed
-	public void verifyCurrentUrlFailed(By by,String urlUnexpected) {
-		Assert.assertNotEquals("verify url failed!" + urlUnexpected, getTagName(by));
+	public void verifyUrl(String url) {
+		Assert.assertTrue("verify url successful!", StringUtils.equals(getUrl(), url));
 	}
 	
 	//get attribute
-	public String getAttribute(By by, String attributeName) {
-		return element(by).getAttribute(attributeName);
+	public String getAttribute(By by, String attribute) {
+		return element(by).getAttribute(attribute);
 	}
 	
 	//verify attribute successful
-	public void verifyAttributeOk(By by,String attributeName,String attributeExpected) {
-		Assert.assertEquals(attributeExpected, getAttribute(by, attributeName));
-	}
-	
-	//verify attribute failed
-	public void verifyAttributeFailed(By by,String attributeName,String attributeUnexpected) {
-		Assert.assertNotEquals(attributeUnexpected, getAttribute(by, attributeName));
-	}
-		
-	//equals
-	private boolean equals(By by,Object obj) {
-		if(isExisted(by)) {
-			return element(by).equals(obj);
-		}else {
-			return false;
-		}
+	public void verifyAttribute(By by,String attribute,String value) {
+		Assert.assertTrue("verify attribute successful", StringUtils.equalsAnyIgnoreCase(getAttribute(by, attribute), value));
 	}
 	
 	//get tag name
@@ -112,13 +94,8 @@ public class UI {
 	}
 	
 	//verify tag name successful
-	public void verifyTagNameOk(By by,String tagNameExpected) {
-		Assert.assertEquals("verify tag name successful!" + tagNameExpected, getTagName(by));
-	}
-	
-	//verify tag name failed
-	public void verifyTagNameFailed(By by,String tagNameUnexpected) {
-		Assert.assertNotEquals("verify tag name failed!" + tagNameUnexpected, getTagName(by));
+	public void verifyTagName(By by,String value) {
+		Assert.assertTrue("verify tag name successful", StringUtils.equalsAnyIgnoreCase(getTagName(by), value));
 	}
 	
 	// get text
@@ -127,13 +104,8 @@ public class UI {
 	}
 	
 	//verify text successful
-	public void verifyTextOk(By by,String textExpected) {
-		Assert.assertEquals("verify text successful!" + textExpected, getText(by));
-	}
-		
-	//verify text failed
-	public void verifyTextFailed(By by,String textUnexpected) {
-		Assert.assertNotEquals("verify text failed!" + textUnexpected, getText(by));
+	public void verifyText(By by,String value) {
+		Assert.assertTrue("verify text successful", StringUtils.equalsAnyIgnoreCase(getText(by), value));
 	}
 	
 	//get size
@@ -146,14 +118,9 @@ public class UI {
 		return driver.getTitle();
 	}
 	
-	//verify title successful
-	public void verifyTitleOk(String titleExpected) {
-		Assert.assertEquals("verify title successful!" + titleExpected, getTitle());
-	}
-			
-	//verify title failed
-	public void verifyTitleFailed(String titleUnexpected) {
-		Assert.assertNotEquals("verify title failed!" + titleUnexpected, getTitle());
+	//verify text successful
+	public void verifyTitle(By by,String value) {
+		Assert.assertTrue("verify title successful", StringUtils.equalsAnyIgnoreCase(getTitle(), value));
 	}
 		
 	// verify element is existed
@@ -229,8 +196,8 @@ public class UI {
 		Assert.assertTrue("Element verify select successful!" + by.toString(), isEnabled(by));
 	}
 				
-	// verify element is disabled
-	public void verifyDisabled(By by) {
+	// verify element is not enabled
+	public void verifyNotEnabled(By by) {
 		Assert.assertFalse("Element verify select failed!" + by.toString(), isEnabled(by));
 	}
 		
