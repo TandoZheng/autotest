@@ -1,3 +1,4 @@
+package com.tando.autotest.kit;
 //package com.tando.autotest.kit;
 //
 //import java.io.IOException;
