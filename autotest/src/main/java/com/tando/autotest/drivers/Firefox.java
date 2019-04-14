@@ -15,11 +15,11 @@ public class Firefox {
 		
 		
 		System.setProperty("webdriver.gecko.driver", ".\\tools\\geckodriver.exe");
-		File file = new File("C:\\Users\\duanjie\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\ijmggxxj.default");
-		FirefoxProfile profile = new FirefoxProfile(file);
-		FirefoxOptions options = new FirefoxOptions();
-		options.setProfile(profile);
-		WebDriver driver = new FirefoxDriver(options);
+//		File file = new File("C:\\Users\\duanjie\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\ijmggxxj.default");
+//		FirefoxProfile profile = new FirefoxProfile(file);
+//		FirefoxOptions options = new FirefoxOptions();
+//		options.setProfile(profile);
+		WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         return driver;
 	}
